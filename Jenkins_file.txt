@@ -12,13 +12,13 @@ pipeline {
                 }
 	post {
                 success {
-                    emailext attachLog : true , 
+                    emailext attachLog : true, 
 		    to: 'christoraju085@gmail.com',
          	    subject: 'Unit and Integration Tests Passed',
                     body: 'The unit and integration tests have passed. See attached logs for more information.'
                 }
                 failure {
-                    emailext attachLog : true , 
+                    emailext attachLog : true, 
 		    to: 'christoraju085@gmail.com',
                     subject: 'Unit and Integration Tests Failed',
                     body: 'The unit and integration tests have failed. See attached logs for more information.'

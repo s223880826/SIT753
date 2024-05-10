@@ -10,6 +10,20 @@ pipeline {
             steps {
 			echo "Unit and Integration Tests"
                 }
+	post {
+                success {
+                    emailext attachLogs : true , 
+		    to: 'christoraju085@gmail.com',
+         	    subject: 'Unit and Integration Tests Passed',
+                    body: 'The unit and integration tests have passed. See attached logs for more information.'
+                }
+                failure {
+                    emailext attachLogs : true , 
+		    to: 'christoraju085@gmail.com',
+                    subject: 'Unit and Integration Tests Failed',
+                    body: 'The unit and integration tests have failed. See attached logs for more information.'
+                }
+            }
             
         }
         stage('Code Analysis') {

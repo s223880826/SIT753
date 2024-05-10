@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Unit and Integration Tests') {
             steps {
-			echo "Unit and Integration Tests"
+			echo "To ensure code functionality, run unit tests using a tool like pytest. For testing how different components work together, run integration tests using a tool such as Selenium or PyTest-BDD."
                 }
 	post {
                 success {
@@ -28,15 +28,41 @@ pipeline {
         }
         stage('Code Analysis') {
             steps {
-			echo "Integrating code using Jenkins plugin analysis tool "
-    
+			echo "For code analysis and ensuring industry standards compliance, integrate a tool like SonarQube or Checkstyle into Jenkins pipeline."
+            }
+	post {
+                success {
+                    	 emailext attachLog : true,
+			 to: 'christoraju085@gmail.com',
+                         subject: 'Code Analysis Passed',
+                         body: 'The code analysis has passed. See attached logs for more information.'
+                }
+                failure {
+                    	 emailext attachLog : true,
+			 to: 'christoraju085@gmail.com',
+                         subject: 'Code Analysis Failed',
+                         body: 'The code analysis has failed. See attached logs for more information.'
+                }
             }
             
         }
         stage('Security Scan') {
             steps {
-			echo "Security scan of the file"
-            
+			echo "To perform a security scan on the code and identify vulnerabilities, consider using a tool like OWASP ZAP or SonarQube with its security plugins."
+            }
+	   post {
+                success {
+                    	 emailext attachLog : true,
+			 to: 'christoraju085@gmail.com',
+                         subject: 'Security Scan Passed',
+                         body: 'The security scan has passed. See attached logs for more information.'
+                }
+                failure {
+                    	 emailext attachLog : true,
+			 to: 'christoraju085@gmail.com',
+                         subject: 'Security Scan Failed',
+                         body: 'The security scan has failed. See attached logs for more information.'
+                }
             }
             
         }
